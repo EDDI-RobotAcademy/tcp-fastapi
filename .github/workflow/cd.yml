@@ -6,8 +6,8 @@ on:
       - main
 
 env:
-  DOCKER_IMAGE: ghcr.io/${{ github.ACTOR }}/fastapi-server
-  VERSION: ${{ github.SHA }}
+  DOCKER_IMAGE: ghcr.io/${{ github.actor }}/fastapi-server
+  VERSION: ${{ github.sha }}
   NAME: fastapi-server
 
 jobs:
@@ -37,7 +37,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.ACTOR }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
 
       - name: Build and push Docker image
@@ -58,7 +58,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.ACTOR }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
 
       - name: Deploy to prod
@@ -74,7 +74,7 @@ jobs:
             cd fastapi/actions-runner
             pwd
 
-            echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ github.ACTOR }} --password-stdin
+            echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
             docker pull ghcr.io/silenc3502/tcp-fastapi-server:latest
 
