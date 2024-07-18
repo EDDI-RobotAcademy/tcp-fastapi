@@ -71,7 +71,7 @@ jobs:
           script: |
             pwd
             ls -al
-            cd fastapi/actions-runner
+            cd runner/fastapi-actions-runner
             pwd
 
             echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
