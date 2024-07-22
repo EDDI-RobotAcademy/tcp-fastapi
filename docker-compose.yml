@@ -1,8 +1,9 @@
 version: "3.7"
 services:
   app:
-    image: ghcr.io/${GITHUB_ACTOR}/tcp-fastapi-server:latest
-    container_name: docker-fastapi-deploy-server
+    image: ghcr.io/${GITHUB_ACTOR}/tcp-fastapi-deploy-server:latest
+    container_name: tcp-fastapi
+
     ports:
       - 33333:33333
     networks:
