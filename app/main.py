@@ -1,28 +1,28 @@
-import os
-from typing import Optional
-
-from dotenv import load_dotenv
-from fastapi import FastAPI
+import os.path
+import sys
 from fastapi.middleware.cors import CORSMiddleware
 
-# from exponential_regression.controller.exponential_regression_controller import exponentialRegressionRouter
+import colorama
+
+import uvicorn
+from dotenv import load_dotenv
+from fastapi import FastAPI
+
 from openai_api_test.controller.openai_api_test_controller import openaiApiTestRouter
 
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'template'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'template', 'include', 'socket_server'))
+
+from template.deep_learning.controller.deep_learning_controller import deepLearningRouter
+from template.dice.controller.dice_controller import diceResultRouter
+from template.system_initializer.init import SystemInitializer
+from template.task_manager.manager import TaskManager
+from template.include.socket_server.initializer.init_domain import DomainInitializer
+
+DomainInitializer.initEachDomain()
+SystemInitializer.initSystemDomain()
+
 app = FastAPI()
-
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
-
-
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str]=None):
-    return {"item_id": item_id, "q": q}
-
-
-# app.include_router(exponentialRegressionRouter)
-app.include_router(openaiApiTestRouter)
 
 load_dotenv()
 
@@ -36,7 +36,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-if __name__ == "__main__":
-    import uvicorn
+app.include_router(deepLearningRouter)
+app.include_router(diceResultRouter)
 
-    uvicorn.run(app, host="192.168.0.41", port=33333)
+app.include_router(openaiApiTestRouter)
+
+if __name__ == "__main__":
+    colorama.init(autoreset=True)
+
+    TaskManager.createSocketServer()
+    uvicorn.run(app, host=os.getenv('HOST'), port=int(os.getenv('FASTAPI_PORT')))
