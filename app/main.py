@@ -8,8 +8,6 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
 
-from openai_api_test.controller.openai_api_test_controller import openaiApiTestRouter
-
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'template'))
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'template', 'include', 'socket_server'))
 
