@@ -37,8 +37,6 @@ app.add_middleware(
 app.include_router(deepLearningRouter)
 app.include_router(diceResultRouter)
 
-app.include_router(openaiApiTestRouter)
-
 if __name__ == "__main__":
     colorama.init(autoreset=True)
 
