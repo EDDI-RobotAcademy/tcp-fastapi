@@ -303,3 +303,8 @@ pyrightconfig.json
 # exclude excel file
 *.xlsx
 *.idea
+
+# exclude *.pem
+*.pem
+*.key
+*.crt

@@ -1,10 +1,11 @@
 version: "3.7"
 services:
   app:
-    image: ghcr.io/silenc3502/tcp-fastapi-for-aws-deploy-test:latest
-    container_name: docker-fastapi-deploy-server
+    image: ghcr.io/${GITHUB_ACTOR}/tcp-fastapi-deploy-server:latest
+    container_name: tcp-fastapi
+
     ports:
-      - 8000:8000
+      - 33333:33333
     networks:
       - app
 
