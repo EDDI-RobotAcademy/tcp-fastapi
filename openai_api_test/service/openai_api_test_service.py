@@ -3,5 +3,5 @@ from abc import ABC, abstractmethod
 
 class OpenaiApiTestService(ABC):
     @abstractmethod
-    def letsChat(self, userSendMessage):
+    def letsChat(self):
         pass
