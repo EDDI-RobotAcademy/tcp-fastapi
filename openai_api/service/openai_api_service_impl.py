@@ -1,6 +1,8 @@
 import os
 import sys
 
+from openai_api.repository.openai_api_repository_impl import OpenaiApiRepositoryImpl
+from openai_api.service.openai_api_service import OpenaiApiService
 from user_defined_queue.repository.user_defined_queue_repository_impl import UserDefinedQueueRepositoryImpl
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'template'))
@@ -8,16 +10,12 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'template', 'inclu
 
 from template.include.socket_server.utility.color_print import ColorPrinter
 
-from openai_api_test.repository.openai_api_test_repository_impl import OpenaiApiTestRepositoryImpl
-from openai_api_test.service.openai_api_test_service import OpenaiApiTestService
-
-
-class OpenaiApiTestServiceImpl(OpenaiApiTestService):
+class OpenaiApiServiceImpl(OpenaiApiService):
     def __init__(self, userDefinedQueueRepository: UserDefinedQueueRepositoryImpl):
-        self.__openaiApiTestRepository = OpenaiApiTestRepositoryImpl()
+        self.__openaiApiRepository = OpenaiApiRepositoryImpl()
         self.__userDefinedQueueRepository = userDefinedQueueRepository
 
-    async def letsChat(self):
+    def requestOpenaiApiResult(self):
         userDefinedReceiverFastAPIChannel = self.__userDefinedQueueRepository.getUserDefinedSocketReceiverFastAPIChannel()
         ColorPrinter.print_important_data("userDefinedReceiverFastAPIChannel", userDefinedReceiverFastAPIChannel)
-        return await self.__openaiApiTestRepository.generateText(userDefinedReceiverFastAPIChannel)
+        return self.__openaiApiRepository.getResult(userDefinedReceiverFastAPIChannel)

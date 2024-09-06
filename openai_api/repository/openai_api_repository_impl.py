@@ -1,13 +1,12 @@
 import json
 import queue
 
-from openai_api_test.repository.openai_api_test_repository import OpenaiApiTestRepository
+from openai_api.repository.openai_api_repository import OpenaiApiRepository
 
 
-
-class OpenaiApiTestRepositoryImpl(OpenaiApiTestRepository):
-    async def generateText(self, userDefinedReceiverFastAPIChannel):
-        print(f"LlamaThreeTestRepositoryImpl getResult()")
+class OpenaiApiRepositoryImpl(OpenaiApiRepository):
+    def getResult(self, userDefinedReceiverFastAPIChannel):
+        print(f"OpenaiApiRepositoryImpl getResult()")
 
         try:
             receivedResponseFromSocketClient = userDefinedReceiverFastAPIChannel.get(False)
@@ -15,6 +14,3 @@ class OpenaiApiTestRepositoryImpl(OpenaiApiTestRepository):
 
         except queue.Empty:
             return "아직 데이터를 처리 중이거나 요청한 데이터가 없습니다"
-
-
-        

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class LlamaTestService(ABC):
+class OpenaiApiService(ABC):
     @abstractmethod
-    def requestLlamaTestResult(self):
+    def requestOpenaiApiResult(self):
         pass
