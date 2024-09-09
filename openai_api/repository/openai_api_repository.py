@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
 
-class LlamaTestRepository(ABC):
+class OpenaiApiRepository(ABC):
     @abstractmethod
     def getResult(self, userDefinedReceiverFastAPIChannel):
         pass

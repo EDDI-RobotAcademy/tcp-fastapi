@@ -8,8 +8,7 @@ import uvicorn
 from dotenv import load_dotenv
 from fastapi import FastAPI
 
-from llama_test.controller.llama_test_controller import llamaTestRouter
-from openai_api_test.controller.openai_api_test_controller import openaiApiTestRouter
+from openai_api.controller.openai_api_controller import openaiApiRouter
 from user_defined_initializer.init import UserDefinedInitializer
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'template'))
@@ -42,8 +41,7 @@ app.add_middleware(
 app.include_router(deepLearningRouter)
 app.include_router(diceResultRouter)
 
-app.include_router(openaiApiTestRouter)
-app.include_router(llamaTestRouter)
+app.include_router(openaiApiRouter)
 
 if __name__ == "__main__":
     colorama.init(autoreset=True)

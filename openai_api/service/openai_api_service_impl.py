@@ -1,9 +1,8 @@
 import os
 import sys
 
-from llama_test.repository.llama_test_repository_impl import LlamaTestRepositoryImpl
-from llama_test.service.llama_test_service import LlamaTestService
-
+from openai_api.repository.openai_api_repository_impl import OpenaiApiRepositoryImpl
+from openai_api.service.openai_api_service import OpenaiApiService
 from user_defined_queue.repository.user_defined_queue_repository_impl import UserDefinedQueueRepositoryImpl
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'template'))
@@ -11,14 +10,12 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'template', 'inclu
 
 from template.include.socket_server.utility.color_print import ColorPrinter
 
-class LlamaTestServiceImpl(LlamaTestService):
+class OpenaiApiServiceImpl(OpenaiApiService):
     def __init__(self, userDefinedQueueRepository: UserDefinedQueueRepositoryImpl):
-        self.__llamaTestRepository = LlamaTestRepositoryImpl()
+        self.__openaiApiRepository = OpenaiApiRepositoryImpl()
         self.__userDefinedQueueRepository = userDefinedQueueRepository
 
-    def requestLlamaTestResult(self):
+    def requestOpenaiApiResult(self):
         userDefinedReceiverFastAPIChannel = self.__userDefinedQueueRepository.getUserDefinedSocketReceiverFastAPIChannel()
         ColorPrinter.print_important_data("userDefinedReceiverFastAPIChannel", userDefinedReceiverFastAPIChannel)
-        return self.__llamaTestRepository.getResult(userDefinedReceiverFastAPIChannel)
-
-    
+        return self.__openaiApiRepository.getResult(userDefinedReceiverFastAPIChannel)

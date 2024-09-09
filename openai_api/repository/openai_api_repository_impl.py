@@ -1,12 +1,12 @@
 import json
 import queue
 
-from llama_test.repository.llama_test_repository import LlamaTestRepository
+from openai_api.repository.openai_api_repository import OpenaiApiRepository
 
 
-class LlamaTestRepositoryImpl(LlamaTestRepository):
+class OpenaiApiRepositoryImpl(OpenaiApiRepository):
     def getResult(self, userDefinedReceiverFastAPIChannel):
-        print(f"LlamaTestRepositoryImpl getResult()")
+        print(f"OpenaiApiRepositoryImpl getResult()")
 
         try:
             receivedResponseFromSocketClient = userDefinedReceiverFastAPIChannel.get(False)

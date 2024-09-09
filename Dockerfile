@@ -1,4 +1,4 @@
-FROM arm64v8/python:3.12
+FROM arm64v8/python:3.9
 
 WORKDIR /app
 
@@ -8,6 +8,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-EXPOSE 33333
+EXPOSE 33333 37373
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "33333"]
+CMD ["sh", "-c", "python3 -m app.main"]
